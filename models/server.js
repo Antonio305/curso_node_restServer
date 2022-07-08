@@ -7,7 +7,8 @@ class Server {
 
 
     constructor() {
-        this.port = 3000;  // puerto
+        // this.port = 3000;  // puerto
+        this.port = process.env.PORT;
         this.app = express(); // server
         // midleware
         this.midleware();
