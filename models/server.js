@@ -2,6 +2,7 @@
 const express = require('express');
 
 const cors = require('cors');
+const { dbConection } = require('../database/config');
 
 class Server {
 
@@ -9,18 +10,31 @@ class Server {
     constructor() {
         // this.port = 3000;  // puerto
         this.port = process.env.PORT;
+
         this.app = express(); // server
+        // conectar a base de datos
+        // lo llamos justo cuando se esta creando nuestro servidor
+        this.conectarDB();
+
         // midleware
         this.midleware();
-          // usuariosPath = '/api/usuarios';  
-          this.endPoit = '/api/usuarios'; 
+
+        // usuariosPath = '/api/usuarios';  
+        this.endPoit = '/api/usuarios';
+
         // routes
         this.routes();
 
     }
+    // fuction para la coneccion a la base de datas
+    async conectarDB()  {
+        // llamamos la function desde aca
+        await dbConection();
+    }
+
     // function midleware 
     midleware() {
-      // podemos definier en el midleware que los tipos de datos que vamos a recivir
+        // podemos definier en el midleware que los tipos de datos que vamos a recivir
 
 
         this.app.use(cors());
@@ -36,12 +50,12 @@ class Server {
     // cerating routes 
     routes() {
 
-      // aca estamos creando el path
-      // la ruta en la cula aca se inicia
-      // solo se hace el llamdo de los otros metodos
-       //comoparametro le pasamo el directorioa de las rutas
+        // aca estamos creando el path
+        // la ruta en la cula aca se inicia
+        // solo se hace el llamdo de los otros metodos
+        //comoparametro le pasamo el directorioa de las rutas
 
-       this.app.use('/api/usuarios', require('../routes/usuarios'));  // este  es un midleware
+        this.app.use('/api/usuarios', require('../routes/usuarios'));  // este  es un midleware
 
 
         // ruta inicial ya no sera llamado  por que esta definido en el index
