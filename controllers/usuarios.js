@@ -12,7 +12,7 @@ const { validarCampos } = require('../middleware/validar_campos');
 const { post } = require('../routes/usuarios');
 const { emailExist } = require('../helpers/db-validators');
 const usuario = require('../models/usuario');
-post
+
 // solo vmaosa crear funcieos y esportarlas
 const usuariosGet = async (req, res = response) => {
     // recivimos un json  o de otro tipo de datos
@@ -28,10 +28,11 @@ const usuariosGet = async (req, res = response) => {
     // termine el otro eto hace que se demore mucho
     // solucion una promesa, ejecuta los dos de forma simultanea
 
-    const usuarios = await Usuario.find()
-        .skip(Number(desde))  // indica de done iniciamoes 
-        // .limit(3);  // recive un numero
-        .limit(Number(limite));  // recive un numero
+    // const usuarios = await Usuario.find()
+    
+    //     .skip(Number(desde))  // indica de done iniciamoes 
+    //     // .limit(3);  // recive un numero
+    //     .limit(Number(limite));  // recive un numero
     // // paginacio de los datoas 
     // const total = await Usuario.countDocuments();
     // //   const total = await Usuario.countDocuments({ status: true });
@@ -42,21 +43,21 @@ const usuariosGet = async (req, res = response) => {
     // promesa 
     // const resp = await Promise.all([
     // destructuracion de arreglos 
-    // const [total, usuarios] = await Promise.all([
-    //     // Usuario.countDocuments(query),
-    //     Usuario.count(query),
-    //     Usuario.find()
-    //         .skip(Number(desde))  // indica de done iniciamoes 
-    //         // .limit(3);  // recive un numero
-    //         .limit(Number(limite)) // recive un numero
+    const [total, usuarios] = await Promise.all([
+        // Usuario.countDocuments(query),
+        Usuario.count(query),
+        Usuario.find()
+            .skip(Number(desde))  // indica de done iniciamoes 
+            // .limit(3);  // recive un numero
+            .limit(Number(limite)) // recive un numero
 
-    // ]);
+    ]);
 
 
     res.json({
-        // total,
+        total,
         usuarios
-        // resp
+        resp
     });
 
     // res.json({
