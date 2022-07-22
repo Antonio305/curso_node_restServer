@@ -3,7 +3,9 @@
 
 // vamos a destructurar expresss para sacara algor de ahi
 // sacamos la funcion routers
-const { Router } = require('express');
+// const { Router } = require('express');
+const express = require('express');
+router = express();
 
 // instancia del paquete express-validator y hacemo una destructuracion
 const { check } = require('express-validator');
@@ -23,7 +25,7 @@ const { usuariosGet,
 } = require('../controllers/usuarios');
 
 // instance fuction
-const router = Router();  // llamamos la funcion
+// const router = Router();  // llamamos la funcion
 
 const Role = require('../models/role');
 const { esRoleValido,
