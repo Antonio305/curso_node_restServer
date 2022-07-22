@@ -20,7 +20,7 @@ class Server {
         this.midleware();
 
         // usuariosPath = '/api/usuarios';  
-        this.endPoit = '/api/usuarios';
+        this.endPoit = 'api/usuarios';
 
         // routes
         this.routes();
