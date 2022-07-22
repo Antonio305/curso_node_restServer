@@ -94,6 +94,7 @@ const usuariosPut = async (req, res = response) => {
     }
     // todos los datos lo almecenamos en el objeto usuario
     const usuario = await Usuario.findByIdAndUpdate(id, resto);
+    const data = await Usuario.findOneAndUpdate();
     res.json(
         usuario);
 
