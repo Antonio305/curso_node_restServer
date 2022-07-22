@@ -37,13 +37,14 @@ const usuariosGet = async (req, res = response) => {
     // //   const total = await Usuario.countDocuments({ status: true });
 
 
-    const query = { estado: true } // indimcmoa uqel os datos que filtren deben ser de esta true
+    const query = { status: true } // indimcmoa uqel os datos que filtren deben ser de esta true
 
     // promesa 
     // const resp = await Promise.all([
     // destructuracion de arreglos 
     const [total, usuarios] = await Promise.all([
-        Usuario.countDocuments(query),
+        // Usuario.countDocuments(query),
+        Usuario.count(query),
         Usuario.find()
             .skip(Number(desde))  // indica de done iniciamoes 
             // .limit(3);  // recive un numero
