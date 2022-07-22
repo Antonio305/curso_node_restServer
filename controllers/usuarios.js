@@ -57,7 +57,7 @@ const usuariosGet = async (req, res = response) => {
     res.json({
         total,
         usuarios
-        resp
+        // resp
     });
 
     // res.json({
