@@ -44,9 +44,9 @@ const usuariosGet = async (req, res = response) => {
     // const resp = await Promise.all([
     // destructuracion de arreglos 
     const [
-        // total,
+        total,
          usuarios] = await Promise.all([
-        // Usuario.countDocuments(query),
+        Usuario.countDocuments(query),
         // Usuario.count(query),
         Usuario.find({})
             .skip(Number(desde))  // indica de done iniciamoes 
@@ -57,7 +57,7 @@ const usuariosGet = async (req, res = response) => {
 
 
     res.json({
-        // total,
+        total,
         usuarios
         // resp
     });
