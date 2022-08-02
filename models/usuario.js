@@ -9,7 +9,7 @@
 // hacemos una destructuracion de mongoose
 
 const { Schema, model } = require('mongoose');
-const usuarios = require('../controllers/usuarios');
+// const usuari os = require('../controllers/usuarios');
 // creamos loa campos
 const UsuarioChema = Schema({
 
@@ -57,7 +57,10 @@ UsuarioChema.methods.toJSON = function () {
     // todo lo demas lo guaurdamos el el parametro usuario 
     // cuando se manda a llamar el toJson ejecuta esta funcion 
     // toObject guarda todos los argumenntos que se pasa
-    const { __v, password, ...usuario } = this.toObject();
+    const { __v,  _id, password, ...usuario } = this.toObject();
+         //  modificamos el objeto
+        usuario.uid = _id;
+
     return usuario;
 }
 

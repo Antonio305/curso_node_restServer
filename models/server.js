@@ -21,13 +21,15 @@ class Server {
 
         // usuariosPath = '/api/usuarios';  
         this.endPoit = 'api/usuarios';
+        // creamos una nueva ruta para la autentificacion 
+        this.authPath = '/api/auth';
 
         // routes
         this.routes();
 
     }
     // fuction para la coneccion a la base de datas
-    async conectarDB()  {
+    async conectarDB() {
         // llamamos la function desde aca
         await dbConection();
     }
@@ -46,8 +48,8 @@ class Server {
 
     }
 
-
-    // cerating routes 
+    // se creaa dentro del metood ya solo se hace la sintacia dentro del metodo
+    // creating  routes 
     routes() {
 
         // aca estamos creando el path
@@ -55,7 +57,14 @@ class Server {
         // solo se hace el llamdo de los otros metodos
         //comoparametro le pasamo el directorioa de las rutas
 
+        // auth y usuarios es de donde estan los metodos com oget, pust entre otros.
+        // ruta para la autentificacion 
+        this.app.use(this.authPath, require('../routes/auth'));
+
         this.app.use('/api/usuarios', require('../routes/usuarios'));  // este  es un midleware
+
+
+
 
 
         // ruta inicial ya no sera llamado  por que esta definido en el index

@@ -30,13 +30,23 @@ const emailExist = async (correo = '') => {
 }
 
 
-const existeUsuarioById = async (id) => {
-         //verificamos si existe el id 
-         const existeUsuario = await Usuario.findById(id);
+const existeUsuarioById = async (id='') => {
+    //verificamos si existe el id 
+    //  const existeUsuario = await Usuario.findById({id:id});
+    // const existeUsuario = await Usuario.findById({id : id});
+    const existeUsuario = await Usuario.findOne({id: id});
 
-         if(!existeUsuario){
-                 throw new Error(`El ID  ${existeUsuario} no existe`); 
-         }
+
+// const id = 1002;
+ 
+// Shoe.findById(id, function (err, shoe) {
+//     if (err) throw error;
+//     console.log(`Item(s) found: ${shoe.name}`);
+// });
+
+    if (!existeUsuario) {
+        throw new Error(`El ID ${id}  no existe`);
+    }
 }
 
 
@@ -45,6 +55,6 @@ module.exports = {
     esRoleValido,
     // emailExiste
     emailExist,
- existeUsuarioById 
+    existeUsuarioById
 
 }

@@ -9,7 +9,7 @@ const Usuario = require('../models/usuario');
 
 // const { validationResult } = require('express-validator');
 const { validarCampos } = require('../middleware/validar_campos');
-const { post } = require('../routes/usuarios');
+// const { post } = require('../routes/usuarios');
 const { emailExist } = require('../helpers/db-validators');
 const usuario = require('../models/usuario');
 
@@ -29,7 +29,7 @@ const usuariosGet = async (req, res = response) => {
     // solucion una promesa, ejecuta los dos de forma simultanea
 
     // const usuarios = await Usuario.find()
-    
+
     //     .skip(Number(desde))  // indica de done iniciamoes 
     //     // .limit(3);  // recive un numero
     //     .limit(Number(limite));  // recive un numero
@@ -45,15 +45,15 @@ const usuariosGet = async (req, res = response) => {
     // destructuracion de arreglos 
     const [
         total,
-         usuarios] = await Promise.all([
-        Usuario.countDocuments(query),
-        // Usuario.count(query),
-        Usuario.find({})
-            .skip(Number(desde))  // indica de done iniciamoes 
-            // .limit(3);  // recive un numero
-            .limit(Number(limite)) // recive un numero
+        usuarios] = await Promise.all([
+            Usuario.countDocuments(query),
+            // Usuario.count(query),
+            Usuario.find({})
+                .skip(Number(desde))  // indica de done iniciamoes 
+                // .limit(3);  // recive un numero
+                .limit(Number(limite)) // recive un numero
 
-    ]);
+        ]);
 
 
     res.json({
@@ -165,24 +165,33 @@ const usuariosPost = async (req, res = response) => {
 
 
 // fuction delete
-const usuariosDelete = async(req, res) => {
+const usuariosDelete = async (req, res) => {
 
     // const { id } = Usur.Usuario.
     // buscamo el 
-  // estraemos el parametro _id 
-   const {id} = req.params;
-     //  eliinar los datos por completo 
+    // estraemos el parametro _id 
+    const { id } = req.params;
+    const uid = req.uid;
+
+    const usuariosAutenticado = req.usuarios;
+
+    //  eliinar los datos por completo 
     // const usuario = await Usuario.findByIdAndDelete(id); 
 
-     // solo cambiamos de estado para mostrar los uqe estan en true
-   const usuarioStatus =await Usuario.findByIdAndUpdate(id, {status: false});
+    // solo cambiamos de estado para mostrar los uqe estan en true
+    //    const usuarioStatus = await Usuario.findByIdAndUpdate(id, {status: false});
 
-        res.json({
-            msg: 'delete desde controlador',
-            // ok: 'yess'
-            // usuario
-            usuarioStatus
-        });
+    const usuarioStatus = await Usuario.findByIdAndUpdate(id, { status: false });
+
+
+    res.json({
+        msg: 'delete desde controlador',
+        // ok: 'yess'
+        // usuario
+        usuarioStatus,
+        uid,
+        usuariosAutenticado,
+    });
 }
 
 // hacemosl ase exportaciones 
@@ -192,3 +201,5 @@ module.exports = {
     usuariosPut: usuariosPut,
     usuariosDelete: usuariosDelete,
 }
+
+

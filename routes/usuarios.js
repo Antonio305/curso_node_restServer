@@ -13,7 +13,6 @@ const { check } = require('express-validator');
 // instan function validarCampos
 
 const { validarCampos } = require('../middleware/validar_campos');
-
 // validacion de los roles 
 // const esRoleValido = require('../helpers/');
 
@@ -32,8 +31,13 @@ const { esRoleValido,
     emailExist,
     existeUsuarioById
 } = require('../helpers/db-validators');
+const { validarJWT
+} = require('../middleware/validar_jwt');
+const { esAdminRole, tieneRole } = require('../middleware/validar-roles');
 // no estamos ejecutando la funcion
 // solo estmos haciendo referencia al misa
+
+
 //con el parenteris hace que se ejecuta la funcion
 router.get('/', usuariosGet);
 
@@ -90,7 +94,11 @@ router.post('/', [
 router.delete('/:id',
     // validadcio npara el id ;preguntmos si es de tipo mongo, y sis existe el id 
     [
+        validarJWT,
+        esAdminRole,  // fuera que debe ser administrador 
+        tieneRole('ADMIN_RULE', 'VENTAS_RULE, NO_RULE'),
         check('id', 'El id no es valido').isMongoId(),
+        // check('id').custom((id) => existeUsuarioById(id)),
         check('id').custom((id) => existeUsuarioById(id)),
         validarCampos
     ], usuariosDelete);
