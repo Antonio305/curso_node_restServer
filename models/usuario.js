@@ -34,7 +34,7 @@ const UsuarioChema = Schema({
     rol: {
         type: String,
         required: true,
-        emun: ['AMIN_ROLE', 'USER_ROLE'],
+        emun: ['ADMIN_ROLE', 'USER_ROLE'],
     },
     status: {
         type: Boolean,

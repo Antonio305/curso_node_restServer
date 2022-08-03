@@ -16,12 +16,7 @@ const { validarCampos } = require('../middleware/validar_campos');
 // validacion de los roles 
 // const esRoleValido = require('../helpers/');
 
-const { usuariosGet,
-    usuariosPost,
-    usuariosPut,
-    usuariosDelete,
-
-} = require('../controllers/usuarios');
+const { usuariosGet, usuariosPost, usuariosPut, usuariosDelete } = require('../controllers/usuarios');
 
 // instance fuction
 // const router = Router();  // llamamos la funcion

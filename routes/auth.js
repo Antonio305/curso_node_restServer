@@ -5,7 +5,7 @@
 
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { login } = require('../controllers/auth');
+const { login, googleSingIn } = require('../controllers/auth');
 
 const { validarCampos } = require('../middleware/validar_campos');
 const { validarJWT } = require('../middleware/validar_jwt');
@@ -23,6 +23,14 @@ router.post('/login',
             check('password', 'El passwork es obligatorio').not().isEmpty(), // pasword no debe ser varias 
             validarCampos  // llamar la funcio para validar los campos 7 mostra los errores
       ], login);
+
+
+router.post('/google',
+      [
+            check('id_token', 'El  id- token es necesario').not().isEmpty(), // pasword no debe ser varias 
+            validarCampos  // llamar la funcio para validar los campos 7 mostra los errores
+      ], googleSingIn);
+
 
 
 module.exports = router;
