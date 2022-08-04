@@ -12,8 +12,9 @@
     <div
       id="g_id_onload"
       data-client_id="1050352137191-ln7hif6th0if1ecuifm5gs43tkmrm22t.apps.googleusercontent.com"
-      data-auto_prompt="false" data-callback="handleCredentialResponse" >
-    </div>
+      data-auto_prompt="false"
+      data-callback="handleCredentialResponse"
+    ></div>
     <div
       class="g_id_signin"
       data-type="standard"
@@ -24,10 +25,9 @@
       data-logo_alignment="left"
     ></div>
 
-    <button id="google_sing_out">Cerrar sesion co google</button>
+    <button id="buttonDiv">Cerrar sesion co google</button>
 
     <script>
-
       console.log(window.location.hostname.includes("localhost"));
       var url = window.location.hostname.includes("localhost")
         ? "http://localhost:3000/api/auth/google"
@@ -37,11 +37,18 @@
         // solo vamos a mandar el token
         console.log("id_token:", response.credential);
 
-        // este es eñ id-token que tenemos que enviar
-        //  este es una promesa
-        // debe ser una peticion post, por defecto es una peticion get
-        // segundo argumento es la configuracion
-        // esot es lo minimo para  hacer las peticiones
+        window.onload = function () {
+          google.accounts.id.initialize({
+            client_id:
+              "1050352137191-ln7hif6th0if1ecuifm5gs43tkmrm22t.apps.googleusercontent.com",
+            callback: handleCredentialResponse,
+          });
+          google.accounts.id.renderButton(
+            document.getElementById("buttonDiv"),
+            { theme: "outline", size: "large" } // customization attributes
+          );
+          google.accounts.id.prompt(); // also display the One Tap
+        };
 
         const body_token = { id_token: response.credential };
 
@@ -64,21 +71,10 @@
             localStorage.setItem("email", resp.usuario.correo);
           })
           .catch(console.warn);
-
-        // decodeJwtResponse() is a custom function defined by you
-        // to decode the credential response.
-        //  const responsePayload = decodeJwtResponse(response.credential);
-
-        //  console.log("ID: " + responsePayload.sub);
-        //  console.log('Full Name: ' + responsePayload.name);
-        //  console.log('Given Name: ' + responsePayload.given_name);
-        //  console.log('Family Name: ' + responsePayload.family_name);
-        //  console.log("Image URL: " + responsePayload.picture);
-        //  console.log("Email: " + responsePayload.email);
       }
 
       // hacemos referencia la buton
-      const button = document.getElementById("google_sing_out");
+      const button = document.getElementById("buttonDiv");
       button.onclick = () => {
         // trae muchos datos
         console.log(google.accounts.id);
