@@ -12,10 +12,12 @@
     <div
       id="g_id_onload"
       data-client_id="1050352137191-ln7hif6th0if1ecuifm5gs43tkmrm22t.apps.googleusercontent.com"
-       data-login_uri="https://rest-007.herokuapp.com/api/auth/google" 
-      data-auto_prompt="false"
-      data-callback="handleCredentialResponse"
-    ></div>
+      <!--
+      data-login_uri="https://rest-007.herokuapp.com/"
+      --
+    >
+      data-auto_prompt="false" data-callback="handleCredentialResponse" >
+    </div>
     <div
       class="g_id_signin"
       data-type="standard"
@@ -26,11 +28,14 @@
       data-logo_alignment="left"
     ></div>
 
-    <button id="google_sing_out"> Cerrar sesion co google </button>
-
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <button id="google_sing_out">Cerrar sesion co google</button>
 
     <script>
+      console.log(window.location.hostname.includes("localhost"));
+      var url = window.location.includes("localhost")
+        ? "http://localhost:3000/api/auth/google"
+        : "https://rest-007.herokuapp.com/api/auth/google";
+
       function handleCredentialResponse(response) {
         // solo vamos a mandar el token
         console.log("id_token:", response.credential);
@@ -43,7 +48,8 @@
 
         const body_token = { id_token: response.credential };
 
-        fetch("http://https://rest-007.herokuapp.com/api/auth/google:3000/api/auth/google", {
+        // fetch("http://localhost:3000/api/auth/google", {
+        fetch(url, {
           method: "POST",
           // headers
           headers: {
@@ -86,11 +92,12 @@
           localStorage.getItem("email"),
           // dado si esta vacio retonar un callbac
           (done) => {
-            localStorage.clear();  // limpirar el storage
-            location.reload();  // recargar y vacir todo en el estADO DE AL aplicacion
+            localStorage.clear(); // limpirar el storage
+            location.reload(); // recargar y vacir todo en el estADO DE AL aplicacion
           }
         );
       };
     </script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
   </body>
 </html>
