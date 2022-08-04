@@ -9,10 +9,12 @@
   <body>
     <h1>Google sing</h1>
 
+     <script src="https://accounts.google.com/gsi/client" async defer></script>
+
     <div
       id="g_id_onload"
       data-client_id="1050352137191-ln7hif6th0if1ecuifm5gs43tkmrm22t.apps.googleusercontent.com"
-           data-login_uri="https://rest-007.herokuapp.com/api/auth/google"
+      data-login_uri="https://rest-007.herokuapp.com/api/auth/google"
       data-auto_prompt="false"
       data-callback="handleCredentialResponse"
     ></div>
@@ -26,8 +28,8 @@
       data-logo_alignment="left"
     ></div>
 
-    <button id="buttonDiv">Cerrar sesion co google</button>
-
+    <button id="button_sing_out">Cerrar sesion co google</button>
+    
     <script>
       console.log(window.location.hostname.includes("localhost"));
       var url = window.location.hostname.includes("localhost")
@@ -75,7 +77,7 @@
       }
 
       // hacemos referencia la buton
-      const button = document.getElementById("buttonDiv");
+      const button = document.getElementById("button_sing_out");
       button.onclick = () => {
         // trae muchos datos
         console.log(google.accounts.id);
@@ -92,6 +94,7 @@
         );
       };
     </script>
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <div id="buttonDiv"></div> 
+    
   </body>
 </html>
