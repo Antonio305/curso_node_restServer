@@ -14,7 +14,6 @@
     <div
       id="g_id_onload"
       data-client_id="1050352137191-ln7hif6th0if1ecuifm5gs43tkmrm22t.apps.googleusercontent.com"
-      data-login_uri="https://rest-007.herokuapp.com/api/auth/google"
       data-auto_prompt="false"
       data-callback="handleCredentialResponse"
     ></div>
@@ -55,8 +54,11 @@
 
         const body_token = { id_token: response.credential };
 
+   
+     fetch("https://rest-007.herokuapp.com/api/auth/google", {
         // fetch("http://localhost:3000/api/auth/google", {
-        fetch(url, {
+
+        // fetch(url, {
           method: "POST",
           // headers
           headers: {
