@@ -12,9 +12,7 @@
     <div
       id="g_id_onload"
       data-client_id="1050352137191-ln7hif6th0if1ecuifm5gs43tkmrm22t.apps.googleusercontent.com"
-      <!--
-      data-login_uri="https://rest-007.herokuapp.com/"
-      --
+      
     >
       data-auto_prompt="false" data-callback="handleCredentialResponse" >
     </div>
@@ -31,8 +29,9 @@
     <button id="google_sing_out">Cerrar sesion co google</button>
 
     <script>
+
       console.log(window.location.hostname.includes("localhost"));
-      var url = window.location.includes("localhost")
+      var url = window.location.hostname.includes("localhost")
         ? "http://localhost:3000/api/auth/google"
         : "https://rest-007.herokuapp.com/api/auth/google";
 
