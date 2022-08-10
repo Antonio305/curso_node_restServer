@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 
   </head>
@@ -31,76 +32,77 @@
     <button id="button_sing_out">Cerrar sesion co google</button>
 
     <script>
+
       function handleCredentialResponse(response) {
         console.log("Encoded JWT ID token: " + response.credential);
       }
-      window.onload = function () {
-        google.accounts.id.initialize({
-          client_id:
-            "1050352137191-ln7hif6th0if1ecuifm5gs43tkmrm22t.apps.googleusercontent.com",
-          callback: handleCredentialResponse,
-        });
-        google.accounts.id.renderButton(
-          document.getElementById("buttonDiv"),
-          { theme: "outline", size: "large" } // customization attributes
-        );
-        google.accounts.id.prompt(); // also display the One Tap dialog
-      };
+      // window.onload = function () {
+      //   google.accounts.id.initialize({
+      //     client_id:
+      //       "1050352137191-ln7hif6th0if1ecuifm5gs43tkmrm22t.apps.googleusercontent.com",
+      //     callback: handleCredentialResponse,
+      //   });
+      //   google.accounts.id.renderButton(
+      //     document.getElementById("buttonDiv"),
+      //     { theme: "outline", size: "large" } // customization attributes
+      //   );
+      //   google.accounts.id.prompt(); // also display the One Tap dialog
+      // };
 
-      //   console.log(window.location.hostname.includes("localhost"));
-      //   var url = window.location.hostname.includes("localhost")
-      //     ? "http://localhost:3000/api/auth/google"
-      //     : "https://rest-007.herokuapp.com/api/auth/google";
+        console.log(window.location.hostname.includes("localhost"));
+        var url = window.location.hostname.includes("localhost")
+          ? "http://localhost:3000/api/auth/google"
+          : "https://rest-007.herokuapp.com/api/auth/google";
 
-      //   function handleCredentialResponse(response) {
-      //     // solo vamos a mandar el token
-      //     console.log("id_token:", response.credential);
+        function handleCredentialResponse(response) {
+          // solo vamos a mandar el token
+          console.log("id_token:", response.credential);
 
-      //   
+        
 
-      //     const body_token = { id_token: response.credential };
+          const body_token = { id_token: response.credential };
 
       //  fetch("https://rest-007.herokuapp.com/api/auth/google", {
-      //     // fetch("http://localhost:3000/api/auth/google", {
+          // fetch("http://localhost:3000/api/auth/google", {
 
-      //     // fetch(url, {
-      //       method: "POST",
-      //       // headers
-      //       headers: {
-      //         "Content-Type": "application/json",
-      //       },
-      //       body: JSON.stringify(body_token),
-      //     })
-      //       // respuesta que el bakcen nos va a regresar la cual es un reaylaboald
-      //       .then((resp) => resp.json())
-      //       .then((resp) => {
-      //         // lo que nos mandara backend
-      //         console.log(resp);
-      //         // guardamos el correro en el local storage
-      //         //  console.log( 'siiiiii', resp.usuario.correo);
-      //         localStorage.setItem("email", resp.usuario.correo);
-      //       })
-      //       .catch(console.warn);
-      //   }
+          fetch(url, {
+            method: "POST",
+            // headers
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body_token),
+          })
+            // respuesta que el bakcen nos va a regresar la cual es un reaylaboald
+            .then((resp) => resp.json())
+            .then((resp) => {
+              // lo que nos mandara backend
+              console.log(resp);
+              // guardamos el correro en el local storage
+              //  console.log( 'siiiiii', resp.usuario.correo);
+              localStorage.setItem("email", resp.usuario.correo);
+            })
+            .catch(console.warn);
+        }
 
-      //   // hacemos referencia la buton
-      //   const button = document.getElementById("button_sing_out");
-      //   button.onclick = () => {
-      //     // trae muchos datos
-      //     console.log(google.accounts.id);
-      //     // mandamos el correo para cerrar la auntentificacion
-      //     google.accounts.id.disableAutoSelect();
+        // hacemos referencia la buton
+        const button = document.getElementById("button_sing_out");
+        button.onclick = () => {
+          // trae muchos datos
+          console.log(google.accounts.id);
+          // mandamos el correo para cerrar la auntentificacion
+          google.accounts.id.disableAutoSelect();
 
-      //     google.accounts.id.revoke(
-      //       localStorage.getItem("email"),
-      //       // dado si esta vacio retonar un callbac
-      //       (done) => {
-      //         localStorage.clear(); // limpirar el storage
-      //         location.reload(); // recargar y vacir todo en el estADO DE AL aplicacion
-      //       }
-      //     );
-      //   };
+          google.accounts.id.revoke(
+            localStorage.getItem("email"),
+            // dado si esta vacio retonar un callbac
+            (done) => {
+              localStorage.clear(); // limpirar el storage
+              location.reload(); // recargar y vacir todo en el estADO DE AL aplicacion
+            }
+          );
+        };
     </script>
-    <div id="buttonDiv"></div>
+    <!-- <div id="buttonDiv"></div> -->
   </body>
 </html>
