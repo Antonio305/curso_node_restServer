@@ -3,6 +3,9 @@
 
 const Role = require('../models/role');
 const Usuario = require('../models/usuario');
+const Productos = require('../models/productos');
+
+
 
 const esRoleValido = async (rol = '') => {
     // si el rol existe no devolvera 
@@ -30,19 +33,19 @@ const emailExist = async (correo = '') => {
 }
 
 
-const existeUsuarioById = async (id='') => {
+const existeUsuarioById = async (id = '') => {
     //verificamos si existe el id 
     //  const existeUsuario = await Usuario.findById({id:id});
     // const existeUsuario = await Usuario.findById({id : id});
-    const existeUsuario = await Usuario.findOne({id: id});
+    const existeUsuario = await Usuario.findOne({ id: id });
 
 
-// const id = 1002;
- 
-// Shoe.findById(id, function (err, shoe) {
-//     if (err) throw error;
-//     console.log(`Item(s) found: ${shoe.name}`);
-// });
+    // const id = 1002;
+
+    // Shoe.findById(id, function (err, shoe) {
+    //     if (err) throw error;
+    //     console.log(`Item(s) found: ${shoe.name}`);
+    // });
 
     if (!existeUsuario) {
         throw new Error(`El ID ${id}  no existe`);
@@ -50,11 +53,27 @@ const existeUsuarioById = async (id='') => {
 }
 
 
+
+// productos 
+
+const existProductById = async (id = '') => {
+
+    const existProducts = Productos.findById(id);
+   if(!existProducts){
+          throw new Error `El ID  ${existProducts} no existe`;
+   }
+
+}
+
+
+
+
 // pasamos somo un objeto
 module.exports = {
     esRoleValido,
     // emailExiste
     emailExist,
-    existeUsuarioById
+    existeUsuarioById,
+    existProductById
 
 }

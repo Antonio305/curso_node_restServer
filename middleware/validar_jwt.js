@@ -1,24 +1,28 @@
 
 
-const { response, request, json } = require('express');
+const { response, request} = require('express');
 const { validationResult } = require('express-validator');
 
 const jwt = require('jsonwebtoken');
 const Usuario = require('../models/usuario');
+ require('dotenv').config();
+
 
 const validarJWT = async (req = request, res = response, next) => {
      // leemo el token 
      const token = req.header('x-token');
-     console.log(token);
+
+     console.log('Token :',token);
      if (!token) {
           // si no hay token sacamos de  la aplicacion
-          return res.json({
-               msg: "Por favor ingresa el   token"
+          return res.status(401).json({
+               msg: " No hay toquen en la peticion"
           });
      }
 
 
      try {
+
           // funcion para a verificar el web token 
           // entremos el payload
           // const payload = jwt.verify(token, process.env.SECRETORPRIVATEKEY);
@@ -30,11 +34,11 @@ const validarJWT = async (req = request, res = response, next) => {
 
 
 
-          // const usuario = await Usuario.findOne({ id: uid });
-          const usuario = await Usuario.findById(uid);
+          const usuario = await Usuario.findOne({ id: uid });
+          // const usuario = await Usuario.findById(uid);
           if (!usuario) {
-               res.status(401).json({
-                    msg: 'Usuario no existe en base de datos .... '
+             return  res.status(401).json({
+                    msg: 'Token no valido - usuario  exise en la DB'
                });
           }
 
@@ -42,7 +46,7 @@ const validarJWT = async (req = request, res = response, next) => {
 
           if (!usuario.status) {
                return res.status(401).json({
-                    msg: 'status con estado false'
+                    msg: 'Token no valido - usuario con estado false'
                });
           }
 

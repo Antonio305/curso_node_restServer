@@ -12,7 +12,7 @@ const { validarJWT } = require('../middleware/validar_jwt');
 
 const router = Router();
 
-router.get('/login');
+// router.get('/login');
 
 router.post('/login',
 
@@ -29,7 +29,9 @@ router.post('/google',
       [
             check('id_token', 'El  id- token es necesario').not().isEmpty(), // pasword no debe ser varias 
             validarCampos  // llamar la funcio para validar los campos 7 mostra los errores
-      ], googleSingIn);
+      ],
+       googleSingIn
+       );
 
 
 

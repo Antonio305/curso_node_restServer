@@ -23,6 +23,17 @@ class Server {
         this.endPoit = 'api/usuarios';
         // creamos una nueva ruta para la autentificacion 
         this.authPath = '/api/auth';
+        // categoria
+        this.categoriaPath = '/api/categorias';
+        // oroductos
+        this.productosPath = "/api/productos";
+        // end portpar las busquedas 
+        this.buscarPath = "/api/buscar";
+
+
+        // podmeos crear un  objeto y definir dentro losp ath 
+
+
 
         // routes
         this.routes();
@@ -63,8 +74,10 @@ class Server {
 
         this.app.use('/api/usuarios', require('../routes/usuarios'));  // este  es un midleware
 
-
-
+        // ruta para .los modelos 
+        this.app.use(this.categoriaPath, require('../routes/categoria'));
+        this.app.use(this.productosPath, require('../routes/productos'));
+        this.app.use(this.buscarPath, require('../routes/buscar'));        
 
 
         // ruta inicial ya no sera llamado  por que esta definido en el index

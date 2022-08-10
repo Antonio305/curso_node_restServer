@@ -183,8 +183,9 @@ const usuariosDelete = async (req, res) => {
 
     const usuarioStatus = await Usuario.findByIdAndUpdate(id, { status: false });
 
+      console.log(usuariosAutenticado);
 
-    res.json({
+     res.json({
         msg: 'delete desde controlador',
         // ok: 'yess'
         // usuario
