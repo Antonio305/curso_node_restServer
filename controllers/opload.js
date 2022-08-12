@@ -316,23 +316,26 @@ const mostrarImagen = async (req = request, res = response) => {
 
      if (modelo.img) {         // preguntamos si la img existe
 
-          const pathImagen = path.join(__dirname, '../opload', coleccion, modelo.img);
+          // const pathImagen = path.join(__dirname, '../opload', coleccion, modelo.img);
 
           // preguntamos si existe el archivo 
           // si existe regresa  un true
-          if (fs.existsSync(pathImagen)) {
+          // if (fs.existsSync(pathImagen)) {
 
-               // mostramos la imagen si existe en la base de datos 
-               return res.sendFile(pathImagen);
-          }
+          // mostramos la imagen si existe en la base de datos 
+          // return res.sendFile(pathImagen);
+
+          return res.sendFile(modelo.img);
 
      }
 
-     // caso contrario si no  hay imagne hay que mandar un relleno la cula 
-     // seria un placeholder 
+}
 
-     // return res.sendFile(placeholderImage);
-     return res.sendFile(modelo.img);
+// caso contrario si no  hay imagne hay que mandar un relleno la cula 
+// seria un placeholder 
+
+return res.sendFile(placeholderImage);
+     // return res.sendFile(modelo.img);
 }
 
 
