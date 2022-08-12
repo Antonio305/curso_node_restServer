@@ -331,7 +331,8 @@ const mostrarImagen = async (req = request, res = response) => {
      // caso contrario si no  hay imagne hay que mandar un relleno la cula 
      // seria un placeholder 
 
-     return res.sendFile(placeholderImage);
+     // return res.sendFile(placeholderImage);
+     return res.sendFile(modelo.img);
 }
 
 
