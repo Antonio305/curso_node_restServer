@@ -4,6 +4,8 @@ const express = require('express');
 const cors = require('cors');
 const { dbConection } = require('../database/config');
 
+const fileUpload = require('express-fileupload');
+
 class Server {
 
 
@@ -29,9 +31,10 @@ class Server {
         this.productosPath = "/api/productos";
         // end portpar las busquedas 
         this.buscarPath = "/api/buscar";
+        /// path para cargar archivos
 
-
-        // podmeos crear un  objeto y definir dentro losp ath 
+        //  path  to opload files , camino apra cargar archivos 
+        this.oploadPath = "/api/opload";
 
 
 
@@ -57,6 +60,14 @@ class Server {
         // direccion publico, para acceder als carpeta publica
         this.app.use(express.static('public'));
 
+        // fileOploa - cargar de archivos 
+        // Note that this option available for versions 1.0.0 and newer. 
+        this.app.use(fileUpload({
+            useTempFiles: true,
+            tempFileDir: '/tmp/',
+            // esto crear las carpeta si no existe de done se guardarlos archivos, la cual no marca error
+            createParentPath : true
+        }));
     }
 
     // se creaa dentro del metood ya solo se hace la sintacia dentro del metodo
@@ -77,8 +88,8 @@ class Server {
         // ruta para .los modelos 
         this.app.use(this.categoriaPath, require('../routes/categoria'));
         this.app.use(this.productosPath, require('../routes/productos'));
-        this.app.use(this.buscarPath, require('../routes/buscar'));        
-
+        this.app.use(this.buscarPath, require('../routes/buscar'));
+        this.app.use(this.oploadPath, require('../routes/opload'));
 
         // ruta inicial ya no sera llamado  por que esta definido en el index
         // this.app.get('/', (req, res) => {
@@ -94,4 +105,5 @@ class Server {
         });
     }
 }
+
 module.exports = Server;

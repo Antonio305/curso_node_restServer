@@ -76,7 +76,9 @@ const putProductos = async (req = request, res = response) => {
 
      const { usuario, ...resto } = req.body;
 
+
      resto.name = resto.name;
+     
      resto.usuario = req.usuarios._id;
 
 

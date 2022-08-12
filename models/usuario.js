@@ -27,7 +27,7 @@ const UsuarioChema = Schema({
         required: [true, 'password required'],
         unique: true
     },
-    image: {
+    img: {
         type: String
     },
     rol: {

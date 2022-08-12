@@ -59,13 +59,22 @@ const existeUsuarioById = async (id = '') => {
 const existProductById = async (id = '') => {
 
     const existProducts = Productos.findById(id);
-   if(!existProducts){
-          throw new Error `El ID  ${existProducts} no existe`;
-   }
+    if (!existProducts) {
+        throw new Error`El ID  ${existProducts} no existe`;
+    }
 
 }
 
 
+const coleccionesPermitidas = (coleccion = '', colecciones = []) => {
+    // verificar si la coleccion  recivida es igual ala coleccion permitidas 
+    const coleccionesIncluidas = colecciones.includes(coleccion);
+    if (!coleccionesIncluidas) {
+        throw new Error(` la coleeccion ${coleccion} no es permitida, ${colecciones}  `);
+    }
+
+    return true;
+}
 
 
 // pasamos somo un objeto
@@ -74,6 +83,7 @@ module.exports = {
     // emailExiste
     emailExist,
     existeUsuarioById,
-    existProductById
+    existProductById,
+    coleccionesPermitidas
 
 }
