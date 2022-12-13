@@ -45,6 +45,8 @@ router.post('/',
 // la categoria definimos quire actualizar o no
 router.put('/:id', [
      validarJWT,
+     // fueza de que el usuario debe ser administradoer 
+
      esAdminRole,
      check('id', 'El id es obligatirio y de tipo mongo').isMongoId(),
      check('id').custom(existProductById),

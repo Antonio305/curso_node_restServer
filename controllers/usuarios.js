@@ -11,7 +11,6 @@ const Usuario = require('../models/usuario');
 const { validarCampos } = require('../middleware/validar_campos');
 // const { post } = require('../routes/usuarios');
 const { emailExist } = require('../helpers/db-validators');
-const usuario = require('../models/usuario');
 
 // solo vmaosa crear funcieos y esportarlas
 const usuariosGet = async (req, res = response) => {
@@ -143,7 +142,7 @@ const usuariosPost = async (req, res = response) => {
     // const existEmail = await Usuario.findOne({ correo: correo });
     // if (existEmail) {
     //     return res.status(400).json({
-    //         msg: "El correo ya existe"
+    //         msg: "El correo ya exipste"
     //     });
     // }
 

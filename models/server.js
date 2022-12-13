@@ -35,7 +35,7 @@ class Server {
 
         //  path  to opload files , camino apra cargar archivos 
         this.oploadPath = "/api/opload";
-
+ 
 
 
         // routes
@@ -81,6 +81,7 @@ class Server {
 
         // auth y usuarios es de donde estan los metodos com oget, pust entre otros.
         // ruta para la autentificacion 
+       
         this.app.use(this.authPath, require('../routes/auth'));
 
         this.app.use('/api/usuarios', require('../routes/usuarios'));  // este  es un midleware

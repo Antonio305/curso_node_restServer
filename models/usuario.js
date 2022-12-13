@@ -14,7 +14,7 @@ const UsuarioChema = Schema({
 
     name: {
         type: String,
-        // podmeos para solo true o pasa una arrgo 
+        // podmeos para solo e o pasa una arrgo 
         required: [true, 'the name is mandatory']
     },
     correo: {
@@ -57,7 +57,7 @@ UsuarioChema.methods.toJSON = function () {
     // cuando se manda a llamar el toJson ejecuta esta funcion 
     // toObject guarda todos los argumenntos que se pasa
     const { __v, status, _id, password, ...usuario } = this.toObject();
-         //  modificamos el objeto
+         //  modificamos el objeto 
         usuario.uid = _id;
 
     return usuario;

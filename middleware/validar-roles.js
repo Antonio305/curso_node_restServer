@@ -22,7 +22,7 @@ const esAdminRole = async (req = request, res = response, next) => {
      if (rol !== 'ADMIN_RULE') {
           // 402 de no actuarizado
           return res.status(401).json({
-               mgs: `${name} no es  administrador`
+               mgs: `${name} no es  administrador, no puede gacer esto`
           });
      }
 
